@@ -79,6 +79,8 @@ def enter_article_menu(articles):
 
 
             if keyenter(key):
+                pad.erase()
+                pad.refresh(top_row, 0, 0, 0, max(curses.LINES-offset, 0), curses.COLS)
                 enter_article(articles[highlighted_row])
 
 def enter_article(article):
