@@ -1,3 +1,4 @@
+from article import Article
 from urllib.parse import quote
 import re
 regex_matching_spaces_between_nonascii_chars = r"(?<=(?![A-Za-z])[^\W\d_])\s+(?=(?![A-Za-z])[^\W\d_])"
@@ -15,6 +16,14 @@ def title_to_url(title, lang_code):
 def print_article_content(page_object):
   print(f"Title: {page_object['title']}\n")
   print(f"Content: {page_object['revisions'][0]['slots']['main']['*']}")
+
+
+def page_extract_object_to_article(page_extract_object, lang_code):
+    return Article(
+        title = page_extract_object['title'],
+        content = preprocess_article_text(page_extract_object['extract'], lang_code),
+        url = title_to_url(page_extract_object['title'], lang_code)
+    )
 
 def print_article_extract(article):
   print(f"Title: {article['title']}")
